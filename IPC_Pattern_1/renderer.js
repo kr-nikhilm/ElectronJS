@@ -3,5 +3,7 @@ const titleInput = document.getElementById('title')
 
 setButton.addEventListener('click', () => {
     const title = titleInput.value
-    window.electronAPI.setTitle(title)
+    if (title) {
+        window.electronAPI.setTitle(title)
+    }
 })

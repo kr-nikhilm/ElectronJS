@@ -1,6 +1,6 @@
 console.log("example")
 
-const { app, BrowserWindow, clipboard }  = require('electron')
+const { app, BrowserWindow, clipboard, dialog }  = require('electron')
 
 function createWindow() {
     let window = new BrowserWindow({
@@ -12,9 +12,21 @@ function createWindow() {
     //window.loadURL('https://google.com')
     window.loadFile('./index.html')
 
-    window.setBackgroundColor('#cccccc')
+    window.setBackgroundColor('#ddffff')
 
     clipboard.writeText('hello')
+
+    // Execute code in the main process
+    window.webContents.executeJavaScript(
+        console.log("hello world")
+    )
+
+    dialog.showMessageBox(window, {
+        type: 'info',
+        title: 'Dialog Box',
+        message: 'Example dialog box',
+        buttons: ['OK']
+    })
 }
 
 app.whenReady().then( () => {
